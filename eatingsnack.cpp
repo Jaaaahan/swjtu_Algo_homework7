@@ -14,7 +14,7 @@ int exit_x,exit_y;
 int direction[4][4]={{1,0},{0,1},{-1,0},{0,-1}};
 int MIN_DIS=100000;
 vector<vector<int> > block;
-vector<vector<bool> > visited;
+//vector<vector<bool> > visited;   状态不一样不能用visited数组
 int n,m;
 int countdistance(snake head)
 {
@@ -77,12 +77,12 @@ void BFS(vector<snake> current,int x1,int y1)
         for (int i = 0; i < 4; i++)
         {
             if (meetblock(current[0].x0+direction[i][0],current[0].y0+direction[i][1],current)
-                ||overboundary(current[0].x0+direction[i][0],current[0].y0+direction[i][1])
-                ||visited[current[0].x0+direction[i][0]][current[0].y0+direction[i][1]])
+                ||overboundary(current[0].x0+direction[i][0],current[0].y0+direction[i][1]))
+                //||visited[current[0].x0+direction[i][0]][current[0].y0+direction[i][1]])
             {
                 continue;
             }
-            visited[current[0].x0+direction[i][0]][current[0].y0+direction[i][1]]=true;
+            //visited[current[0].x0+direction[i][0]][current[0].y0+direction[i][1]]=true;
             vector<snake> tempsnake1=current;
             vector<snake> tempsnake2=current;
             tempsnake1[0].x0=current[0].x0+direction[i][0];
@@ -112,7 +112,7 @@ int main()
     {
         cin>>block[i][0]>>block[i][1];
     }
-    visited.resize(n+1,vector<bool>(m+1,false));
+    //visited.resize(n+1,vector<bool>(m+1,false));
     snakes[0].distance=snakes[0].x0-1+snakes[0].y0-1;
     //auto start = high_resolution_clock::now();
     BFS(snakes,1,1);
